@@ -6,10 +6,15 @@ using UnityEngine.UI;
 public class Dress_Pug_Controller : MonoBehaviour
 {
     [Header("Pug Attributes")]
-    public bool isRotating;
+    public bool emoteSleep;
     private Vector3 titlePos, closetPos;
     private Quaternion titleRot, closetRot;
     private Animator pugAnim;
+
+    [Header("Pug Expression References")]
+    public Material pugMaterial;
+    public Texture currentPugBodyTexture, prevPugBodyTexture;
+    public List<Texture> pugBodyTextures, pugExpressionTextures;
 
     [Header("Object References")]
     public Slider pugRotateSlider;
@@ -33,22 +38,20 @@ public class Dress_Pug_Controller : MonoBehaviour
         closetRot = new Quaternion(0.0f, 219.33f, 0.0f, 0.0f);
 
         pugAnim = GetComponent<Animator>();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (isRotating)
-        {
-            RotatePug();
-        }
+        pugRotateSlider.value = 0.3963898f;
+        pugDisplaySlider.value = 0.3963898f;
+
+        // Get current pug texture
+        currentPugBodyTexture = pugMaterial.mainTexture;
+        prevPugBodyTexture = currentPugBodyTexture;
     }
 
     void OnSliderChanged(float value)
     {
         // How much we've changed
         float delta = value - this.previousValue;
-        this.transform.Rotate(Vector3.up * delta * 360);
+        this.transform.Rotate(-Vector3.up * delta * 360);
 
         // Set our previous value for the next change
         this.previousValue = value;
@@ -61,21 +64,53 @@ public class Dress_Pug_Controller : MonoBehaviour
     {
         if (!toggle)
         {
-            pugRotateSlider.value = 0;
-            pugDisplaySlider.value = 0;
+            pugRotateSlider.value = 0.3963898f;
+            pugDisplaySlider.value = 0.3963898f;
         }
 
         pugRotateSlider.gameObject.SetActive(toggle);
         pugDisplaySlider.gameObject.SetActive(toggle);
     }
 
-    private void RotatePug()
-    {
-        transform.Rotate(Vector3.up * 40.0f * Time.deltaTime);
-    }
-
     public void PlayEmoteOnPug(int emoteIndex)
     {
         pugAnim.SetInteger("playEmote", emoteIndex);
+
+        switch(emoteIndex)
+        {
+            case 1:
+                emoteSleep = true;
+                ChangePugExpression("Closed");
+                break;
+            default:
+                emoteSleep = false;
+                ChangePugExpression("Neutral");
+                break;
+        }
+    }
+
+    public void ChangePugExpression(string expressionName)
+    {
+        // Looks for expression on pug's currently equipped skin
+        if (expressionName != "Neutral" && expressionName != null)
+        {
+            foreach (Texture expression in pugExpressionTextures)
+            {
+                if (expression.name == (currentPugBodyTexture.name + "_" + expressionName))
+                {
+                    // Save prev expression
+                    prevPugBodyTexture = currentPugBodyTexture;
+
+                    currentPugBodyTexture = expression;
+                    pugMaterial.mainTexture = currentPugBodyTexture;
+                }
+            }
+        }
+        else
+        {
+            // Set back to neutral
+            currentPugBodyTexture = prevPugBodyTexture;
+            pugMaterial.mainTexture = currentPugBodyTexture;
+        }
     }
 }

@@ -202,7 +202,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b604320cbfdade4b99f7a90f840f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRotating: 0
+  emoteSleep: 0
+  pugMaterial: {fileID: 2100000, guid: 0af18c6542b9b2846b985dcfcf1e8b70, type: 2}
+  currentPugBodyTexture: {fileID: 0}
+  pugBodyTextures:
+  - {fileID: 2800000, guid: d0371f4b28a09c14fa4dbcc0db866307, type: 3}
+  pugExpressionTextures:
+  - {fileID: 2800000, guid: 81eaebb46e5f6a440b3aadea0f29bb61, type: 3}
   pugRotateSlider: {fileID: 601012620}
   pugDisplaySlider: {fileID: 1313949194}
 --- !u!4 &33000438
@@ -212,7 +218,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33000435}
-  m_LocalRotation: {x: 0, y: 0.94167644, z: -0, w: -0.33651993}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.576233, y: -3.423874, z: -3.2865257}
   m_LocalScale: {x: 1.0178217, y: 1.0178218, z: 1.0178217}
   m_Children:
@@ -221,7 +227,7 @@ Transform:
   - {fileID: 928823992}
   m_Father: {fileID: 760131502}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 219.33, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &47814063
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6933,7 +6939,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b604320cbfdade4b99f7a90f840f8fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRotating: 0
+  emoteSleep: 0
+  pugMaterial: {fileID: 0}
+  currentPugBodyTexture: {fileID: 0}
+  pugBodyTextures: []
+  pugExpressionTextures: []
   pugRotateSlider: {fileID: 0}
   pugDisplaySlider: {fileID: 0}
 --- !u!1 &1860450584

@@ -62,7 +62,7 @@ public class Menu_Controller : MonoBehaviour
 
     public void NavigateMenu(string navDirection = null)
     {
-        if (Input.GetKey(KeyCode.LeftArrow) && isNotSpamming && !hubWorldLockedIn || navDirection == "Left")
+        if ((Input.GetKey(KeyCode.LeftArrow) || navDirection == "Left" ) && isNotSpamming && !hubWorldLockedIn)
         {
             // Set index to find selected hub world
             if (selectedHubWorldIndex == 0)
@@ -83,7 +83,7 @@ public class Menu_Controller : MonoBehaviour
             StartCoroutine("StopSpamCooldown", spamCooldown + transitionDelay);
         }
 
-        if (Input.GetKey(KeyCode.RightArrow) && isNotSpamming && !hubWorldLockedIn || navDirection == "Right")
+        if ((Input.GetKey(KeyCode.RightArrow) || navDirection == "Right") && isNotSpamming && !hubWorldLockedIn)
         {
             // Set index to find selected hub world
             if (selectedHubWorldIndex == hubWorldList.Count - 1)
@@ -105,7 +105,7 @@ public class Menu_Controller : MonoBehaviour
         }
 
         // Lock in hub world if one is selected
-        if (Input.GetKeyDown(KeyCode.Return) && isNotSpamming || navDirection == "Middle")
+        if ((Input.GetKeyDown(KeyCode.Return) || navDirection == "Middle") && isNotSpamming)
         {
             CheckHubWorldSelection();
         }

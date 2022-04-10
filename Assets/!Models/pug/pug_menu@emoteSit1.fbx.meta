@@ -1,14 +1,12 @@
 fileFormatVersion: 2
-guid: b91502e0e331e184da803f0751db3a1e
+guid: 50dc77325d5a7774e9d5623603c39b05
 ModelImporter:
   serializedVersion: 20200
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: pug_Mat
-    second: {fileID: 2100000, guid: 0af18c6542b9b2846b985dcfcf1e8b70, type: 2}
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -77,14 +75,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  referencedClips:
-  - f879cd8c41fd6714ebd43f8d6909c29c
-  - 114652f8ca7d6004ba9f90157cfd8d0f
-  - 50dc77325d5a7774e9d5623603c39b05
-  - f16ed98588d0eaf45a21c3e9b802def3
-  - 25640237e11278248bf2d052c9b19a79
-  - 75b2ae3f3f795d54f92f98260fa5ba27
-  - b5cb57a38a9a2874692949a46ebca07a
+  referencedClips: []
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
@@ -97,7 +88,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 100
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
