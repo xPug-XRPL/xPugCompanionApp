@@ -7,12 +7,19 @@ using System.IO;
 public class Persistent_Game_Controller : MonoBehaviour
 {
     [Header("Persistent Game Attributes")]
+    public CosmeticInventoryCompact PlayersCosmeticEquipped;
+    public int eCosmeticHat_SelectedIndex, eCosmeticFace_SelectedIndex, eCosmeticBody_SelectedIndex, eCosmeticLeg_SelectedIndex, eCosmeticTail_SelectedIndex;
+    public bool hasSavedPlayerData;
     [SerializeField] private CosmeticInventory _LocalCosmeticInventory;
     [SerializeField] private List<CosmeticIcon> cosmeticIconDatabase;
 
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
+
+        // Add slots for currently equipped cosmetics to fill (read from file later and auto do this)
+        // if file exists do stuff here
+
     }
 
     private void Update()
@@ -28,6 +35,40 @@ public class Persistent_Game_Controller : MonoBehaviour
             LoadCosmeticDataFromFile();
             Debug.Log("Reading from file!");
         }
+    }
+
+    public void AddToPlayersCosmeticEquipped(CosmeticType type, CosmeticName name)
+    {
+        // AKA CosmeticInventoryCompact
+        CosmeticDataCompact newData = new CosmeticDataCompact();
+        newData.name = name;
+        newData.type = type;
+
+        /*if (type == CosmeticType.Empty)
+        {
+            PlayersCosmeticEquipped.cosmeticInventoryCompact[0] = newData;
+        }
+        else if (type == CosmeticType.Hat)
+        {
+            PlayersCosmeticEquipped.cosmeticInventoryCompact[1] = newData;
+        }
+        else if (type == CosmeticType.Face)
+        {
+            PlayersCosmeticEquipped.cosmeticInventoryCompact[2] = newData;
+        }
+        else if (type == CosmeticType.Body)
+        {
+            PlayersCosmeticEquipped.cosmeticInventoryCompact[3] = newData;
+        }
+        else if (type == CosmeticType.Leg)
+        {
+            PlayersCosmeticEquipped.cosmeticInventoryCompact[4] = newData;
+        }
+        else if (type == CosmeticType.Tail)
+        {
+            PlayersCosmeticEquipped.cosmeticInventoryCompact[5] = newData;
+        }*/
+        PlayersCosmeticEquipped.cosmeticInventoryCompact.Add(newData);
     }
 
     public void AddToCosmeticInventory(CosmeticName name, int quantity, string description, CosmeticType type)
@@ -154,11 +195,24 @@ public class CosmeticInventory
 }
 
 [Serializable]
+public class CosmeticInventoryCompact
+{
+    public List<CosmeticDataCompact> cosmeticInventoryCompact;
+}
+
+[Serializable]
 public class CosmeticData
 {
     public CosmeticName name;
     public int quantity;
     public string description;
+    public CosmeticType type;
+}
+
+[Serializable]
+public class CosmeticDataCompact
+{
+    public CosmeticName name;
     public CosmeticType type;
 }
 

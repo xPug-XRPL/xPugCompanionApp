@@ -31,21 +31,22 @@ public class Dress_Slot_Controller : MonoBehaviour
         contentAddedHeight = 288;
         rowStartingHorizontalCoordinate = 0f;
         persistentGameControllerScript = GameObject.FindGameObjectWithTag("GameController").GetComponent<Persistent_Game_Controller>();
+
+        // Get indexes to mirror last saved outfit with data stored in persistent
+        tabHat_SelectedIndex = persistentGameControllerScript.eCosmeticHat_SelectedIndex;
+        tabFace_SelectedIndex = persistentGameControllerScript.eCosmeticFace_SelectedIndex;
+        tabBody_SelectedIndex = persistentGameControllerScript.eCosmeticBody_SelectedIndex;
+        tabLeg_SelectedIndex = persistentGameControllerScript.eCosmeticLeg_SelectedIndex;
+        tabTail_SelectedIndex = persistentGameControllerScript.eCosmeticTail_SelectedIndex;
+
+
         _DressLocalCosmeticInventory = persistentGameControllerScript.GetCosmeticInventory();
         startContentSize = rectTransform.sizeDelta;
     }
 
     void Start()
     {
-        PopulateRows(CosmeticType.Hat);
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            PopulateRows(CosmeticType.Face);
-        }
+        PopulateRows(CosmeticType.Hat); // LEFT OFF PROBLEM HERE, RESETS TO 0 CANT GO TO LAST SAVED SLOT
     }
 
     public void SelectSlot(GameObject newSlot)
@@ -234,6 +235,7 @@ public class Dress_Slot_Controller : MonoBehaviour
                     //
                     if (slot.GetComponent<Dress_Slot>().slotStoredCosmeticData.type == CosmeticType.Empty && cosmeticIndex > 1)
                     {
+                        // not the culprit 8/10/22
                         slot.gameObject.SetActive(false);
                     }
 
@@ -252,10 +254,17 @@ public class Dress_Slot_Controller : MonoBehaviour
                 //Debug.Log("INDEX LOOKING FOR: " + GetSelectedTypeIndex(selectedSlotType) + " OF TYPE: " + selectedSlotType);
                 //Debug.Log("MATCHES: " + (tempItem.GetComponent<Dress_Slot>().indexInRows == GetSelectedTypeIndex(selectedSlotType)));
 
-                if (tempItem.GetComponent<Dress_Slot>().indexInRows == GetSelectedTypeIndex(selectedSlotType) && tempItem.GetComponent<Dress_Slot>().indexInRows != 0)
+                if (tempItem.GetComponent<Dress_Slot>().indexInRows == GetSelectedTypeIndex(selectedSlotType))
                 {
-                    tempItem.GetComponent<Dress_Slot>().OnSelection(true);
-                    break;
+                    if (tempItem.GetComponent<Dress_Slot>().indexInRows != 0)
+                    {
+                        tempItem.GetComponent<Dress_Slot>().OnSelection(true);
+                        break;
+                    }
+                    else
+                    {
+                        //tempItem.GetComponent<Dress_Slot>().ShowThatSelected(true);
+                    }
                 }
             }
         }

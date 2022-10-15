@@ -37,6 +37,7 @@ public class Menu_Transition : MonoBehaviour
                 break;
             case 3:
                 Debug.Log("Action 3");
+                GoToScene(2);
                 break;
             default:
                 Debug.Log("Action ?");

@@ -25,10 +25,13 @@ public class Dress_Pug_Controller : MonoBehaviour
     {
         // Help thanks to TreyH [https://answers.unity.com/questions/1477968/rotate-gameobject-with-gui-slider.html]
         // Assign a callback for when this slider changes
-        this.pugRotateSlider.onValueChanged.AddListener(this.OnSliderChanged);
+        if (this.pugRotateSlider)
+        {
+            this.pugRotateSlider.onValueChanged.AddListener(this.OnSliderChanged);
 
-        // And current value
-        this.previousValue = this.pugRotateSlider.value;
+            // And current value
+            this.previousValue = this.pugRotateSlider.value;
+        }
     }
 
     // Start is called before the first frame update
@@ -41,6 +44,9 @@ public class Dress_Pug_Controller : MonoBehaviour
 
         pugRotateSlider.value = 0.3963898f;
         pugDisplaySlider.value = 0.3963898f;
+
+        // Reset expression
+        ResetExpressionToNeutral();
 
         // Get current pug texture
         currentPugBodyTexture = pugMaterial.mainTexture;
@@ -108,9 +114,14 @@ public class Dress_Pug_Controller : MonoBehaviour
         }
         else
         {
-            // Set back to neutral
-            currentPugBodyTexture = prevPugBodyTexture;
-            pugMaterial.mainTexture = currentPugBodyTexture;
+            ResetExpressionToNeutral();
         }
+    }
+
+    public void ResetExpressionToNeutral()
+    {
+        // Set back to neutral
+        currentPugBodyTexture = pugBodyTextures[0];
+        pugMaterial.mainTexture = currentPugBodyTexture;
     }
 }

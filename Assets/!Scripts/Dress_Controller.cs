@@ -15,6 +15,7 @@ public class Dress_Controller : MonoBehaviour
     public List<GameObject> tabObjects;
     public GameObject pugObject;
     private Dress_Pug_Controller pugObjectScript;
+    public Persistent_Game_Controller persistentController;
 
     [Header("Dress Attributes")]
     public GameObject closetObject;
